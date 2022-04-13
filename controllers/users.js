@@ -41,7 +41,7 @@ exports.addUser = async (req,res) =>{
 exports.getAuth = async (req,res)=>{
   try {
     const id = req.userId;
-    const user = await User.findById(id).select('-password');
+    const user = await User.findById(id).select('-password -createdAt -updatedAt');
     res.status(200).json({ok:true, user:user})
   } catch (error) {
     console.log(error);
