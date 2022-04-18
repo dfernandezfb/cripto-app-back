@@ -50,3 +50,17 @@ exports.deleteCoin = async (req,res)=>{
     res.status(400).json({ok:false, message:'Ha ocurrido un error'});
   }
 }
+
+exports.updateCoin = async (req,res)=>{
+  try {
+    const id = req.params.id;
+    await Coin.findByIdAndUpdate(id, req.body);
+    //? Forma alternativa
+    // const coinUpdated = await Coin.findByIdAndUpdate(id, req.body,{new:true});
+    // res.status(200).json({ok:true, coinUpdated:coinUpdated});
+    res.status(200).json({ok:true, message:'Actualización correcta'});
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ok:false, message:'Ha ocurrido un error'});
+  }
+}
